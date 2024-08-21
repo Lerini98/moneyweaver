@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Data - {{ company_id }}</title>
+</head>
+<body>
+    <h1>Company Data for ID: {{ company_id }}</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Avg</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in company_data %}
+                <tr>
+                    <td>{{ row.Date }}</td>
+                    <td>{{ row.High }}</td>
+                    <td>{{ row.Low }}</td>
+                    <td>{{ row.avg }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
