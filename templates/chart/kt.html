@@ -14,8 +14,11 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Django에서 전달된 데이터를 JavaScript 변수에 할당
-            var dates = {{ dates|safe }};
-            var avgPrices = {{ avg_prices|safe }};
+            var dates = JSON.parse('{{ dates|escapejs }}');
+            var avgPrices = JSON.parse('{{ avg_prices|escapejs }}');
+
+            console.log("Dates:", dates);
+            console.log("Average Prices:", avgPrices);
 
             var options = {
                 chart: {
@@ -38,7 +41,7 @@
                     }
                 },
                 title: {
-                    text: 'Company {{ company_id }} 주식 평균 가격',
+                    text: '{{ company_id }} 주식 평균 가격',
                     align: 'center'
                 }
             };
