@@ -66,16 +66,43 @@
 
 ## 📒3. 1st Agile 진행사항
 ### 1st Agile 목표
- 웹 서비스 구현 ...
+본 프로젝트의 1차 목표는 증권회사의 API를 활용하여 주식 예측에 필요한 과거 데이터를 수집, 가공 및 데이터베이스 설계 후, 이를 Django 프레임워크와 연동하여 사용자에게 시각적으로 이해하기 쉬운 주식 데이터를 제공하는 웹 애플리케이션을 구축하는 것입니다.
+
+#### 데이터 수집부분
+
+1. **한국 투자증권 API** : 한국 투자증권에서 과거 주식 차트 데이터 들고오는 용도로 수집하였습니다.<br>
+    > **투자시장의 경기를 판단하는 기간**
+    - 단기 투자 시 필요한 기간 : 1년 ~ 3년
+    - 중기 투자 시 필요한 기간 : 5년 ~ 7년
+    - 장기 투자 시 필요한 기간 : 10년 이상
+
+2. **RSI** : 주식 데이터를 분석하기 위해 RSI와 Stochastic RSI를 계산하는 Python 함수를 작성하였습니다.<br>
+    > **활용방안**
+    - 2차 애자일, 모델학습단계에서 활용할 예정
+  
+3. **naver 주식데이터** : 분당 주식 차트 정보를 수집하였습니다.
+
+4. **크롤링 기업리스트**
+    > **대규모 정보를 기반으로 AI에 투자하는 기업 (종목코드)**
+    - 005930 삼성전자 
+    - 035420 네이버
+    - 003550 LG <- LG CNS
+    - 034730 SK inc. <- sk 텔레콤, sk C&C 지주회사
+    - 035720 카카오
+    - 000660 SK 하이닉스
+    - 030200 KT
+    - 005380 현대자동차
+    - 005490 포스코
 
 
-
-#### 데이터 수집현황부분
-직접작성
 #### 데이터 베이스부분 
 직접작성
 #### 사용자 화면 시각화
-직접작성
+1. **메인화면 구현** : 사용자가 저희 서비스에 접속하면 처음 보게 되는 메인 페이지입니다. 메인 페이지에서는 우리의 서비스에 대한 간략한 설명을 제공하며, 하단에 네비게이션 바를 추가하여 사용자가 서브 페이지로 쉽게 이동할 수 있도록 구현하였습니다.
+
+2. **chart-index page (서브페이지)** : 저희가 크롤링한 기업별 과거 주식 데이터를 확인할 수 있는 안내 페이지를 구현하였습니다. 이 페이지에서는 각 기업의 주식 정보를 쉽게 조회할 수 있도록 안내하고 있습니다.
+
+3. **chart-graph page(그래프)** : 해당 기업의 주식 데이터를 차트로 시각화하여 사용자들이 데이터를 쉽게 파악할 수 있도록 화면을 구성하였습니다.
 #### aws RDS 생성 및 배포부분
 직접작성
 
@@ -108,7 +135,7 @@
 ## 6. 📜ERD 설계서
 Trandigo 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 제주도 관광 데이터 분석 시스템의 데이터 구조를 시각적으로 표현한 다이어그램입니다.<br> 이 설계서는 다양한 관광 관련 데이터를 효율적으로 관리하고 분석하기 위해, 각 데이터 간의 관계와 구조를 명확하게 정의합니다. <br> ERD 설계를 통해 관광객의 방문 목적, 연령대, 소비 패턴 등 복잡한 데이터를 체계적으로 관리하고, 이를 기반으로 추가적인 기능도 구현할 수 있습니다. <br>
 
-<br>![image](https://iartemis.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Feb64ff85-d7b7-4bac-a14e-309950f8d308%2F04e67daa-863d-4a85-bbf4-1813fa86752d%2Fimage.png?table=block&id=25eb7ccf-c519-4e36-be0f-55d4d09558d0&spaceId=eb64ff85-d7b7-4bac-a14e-309950f8d308&width=1190&userId=&cache=v2)
+<br>![alt text](image.png)
 
 
 
@@ -123,48 +150,12 @@ Trandigo 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 제주도
 
 
 ##  💻8. 프로젝트 결과 
-- 테스트/ 시연 이미지 삽입
-<table>
-  <tr>
-    <td style="text-align: center;">
-      <img src="https://media.discordapp.net/attachments/1271032969548664894/1274923399243628605/2024-08-19_11.46.57.png?ex=66c40471&is=66c2b2f1&hm=c5b9d3cca794ba1b5bd8626ac6d1552ddcb771695032a9656e56a53273ec9a68&=&format=webp&quality=lossless&width=881&height=551" alt="Main Screen" style="height: 300px; width: auto;">
-      <br><b>💻메인화면</b>
-    </td>
-    <td style="text-align: center;">
-      <img src="https://media.discordapp.net/attachments/1271032969548664894/1274923399612862509/2024-08-19_11.47.18.png?ex=66c40471&is=66c2b2f1&hm=e2b5cda212d846bebbbc21927252fccc78c52370d0cc44976e6ce0e41b789511&=&format=webp&quality=lossless&width=881&height=551" alt="Keyword Chart" style="height: 300px; width: auto;">
-      <br><b>📈Keyword 별 chart</b>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align: center;">
-      <img src="https://media.discordapp.net/attachments/1271032969548664894/1274923399944208426/2024-08-19_11.47.44.png?ex=66c40471&is=66c2b2f1&hm=a39748b4fdb6f601f59e751741489f976b1193d3d9d096c8cb5cc63087bdc6a0&=&format=webp&quality=lossless&width=881&height=551" alt="Visitor Chart" style="height: 300px; width: auto;">
-      <br><b>👥Visitor 별 chart</b>
-    </td>
-    <td style="text-align: center;">
-      <img src="https://cdn.discordapp.com/attachments/1271032969548664894/1274923400384479252/2024-08-19_11.49.00.png?ex=66c40471&is=66c2b2f1&hm=cbc844366cb170ed81c5deb28e34661aa48e04d5fe4f9a5fd53cc19a6f734275&" alt="Consumption Chart" style="height: 300px; width: auto;">
-      <br><b>🪙Consumption chart</b>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align: center;">
-      <img src="https://cdn.discordapp.com/attachments/1271032969548664894/1274923400841920543/2024-08-19_11.49.21.png?ex=66c40471&is=66c2b2f1&hm=d6f7787e7aba3ae4c804a7307a9640e6982ea398e66f743f82c48cfa46cbae94&" alt="Jeju Region Map" style="height: 300px; width: auto;">
-      <br><b>🍊제주 지역 표시</b>
-    </td>
-    <td style="text-align: center;">
-      <img src="https://cdn.discordapp.com/attachments/1271032969548664894/1274923401303162943/2024-08-19_11.49.35.png?ex=66c40471&is=66c2b2f1&hm=dabae745ed23f3af48375e2249dda4d9d778e58257fcaa6a78d3537000249b7a&" alt="Regional Data" style="height: 300px; width: auto;">
-      <br><b>🌴지역별 데이터</b>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align: center;">
-      <img src="https://cdn.discordapp.com/attachments/1271032969548664894/1274923401625993226/2024-08-19_11.49.42.png?ex=66c40471&is=66c2b2f1&hm=816b08c41656fc209976c79a31734b78efa8edff03faf53b39675eaacac2372a&" alt="Jeju Weather Chart" style="height: 300px; width: auto;">
-      <br><b>🌦️제주 날씨 chart</b>
-    </td>
-    <td style="text-align: center;">
-      <!-- 여기에 추가적인 내용이 있으면 삽입 -->
-    </td>
-  </tr>
-</table>
+1. main page
+![alt text](image-1.png)
+<br>
+2. index page
+
+
 
 
 
