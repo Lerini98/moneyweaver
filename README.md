@@ -234,6 +234,111 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 ### 재현✏️
 - **느낀점** : 2차 애자일에서는 머신러닝과 딥러닝을 배운 것을 토대로 자동 매매 프로그램을 돌려보는 것이 목표이기 때문에 수업을 잘 듣고 복습을 열심히 해야겠다고 느꼈습니다.
 <br><br><br>
+
+
 ## 📖9. 2nd Agile 주요계획
+### RSI 계산 공식
+
+1. **종가 변화량 계산**:
+   - `delta = stck_clpr.diff()`
+   - **stck_clpr**(Stock Closing Price): 일별 종가를 나타내는 컬럼
+
+2. **상승폭 (Uptick)과 하락폭 (Downtick) 계산**:
+   - **상승폭 (Gain)**: `gain = delta.where(delta > 0, 0)`
+   - **하락폭 (Loss)**: `loss = -delta.where(delta < 0, 0)`
+
+3. **Average Gain과 Average Loss 계산**:
+   - **Average Gain**: `average_gain = gain.rolling(window=14, min_periods=1).mean()`
+   - **Average Loss**: `average_loss = loss.rolling(window=14, min_periods=1).mean()`
+
+4. **RS (Relative Strength) 계산**:
+
+
+   $RS = \frac{\text{average gain}}{\text{average loss}}$
+
+5. **RSI 계산**:
+
+   $RSI = 100 - \frac{100}{1 + RS}$
+
+### Python 코드 예제: Daily Stock Info 데이터로 RSI 계산
+
+아래는 Daily Stock Info 데이터에서 **stck_clpr** 컬럼을 사용해 RSI를 계산하는 Python 코드 일부이다.
+
+```python
+import pandas as pd
+
+# Daily Stock Info 데이터 로드 (예시 데이터프레임)
+data = pd.DataFrame({
+    'stck_bsop_date': ['20230101', '20230102', '20230103', '20230104', '20230105'],
+    'stck_clpr': [100000, 102000, 101000, 103000, 105000]
+})
+
+# 기간 설정 (기본: 14일)
+window_length = 14
+
+# 종가 변화량 계산
+delta = data['stck_clpr'].diff()
+
+# 상승폭 (Uptick)과 하락폭 (Downtick) 계산
+gain = delta.where(delta > 0, 0)
+loss = -delta.where(delta < 0, 0)
+
+# Average Gain과 Average Loss 계산
+average_gain = gain.rolling(window=window_length, min_periods=1).mean()
+average_loss = loss.rolling(window=window_length, min_periods=1).mean()
+
+# RS (Relative Strength) 계산
+rs = average_gain / average_loss
+
+# RSI 계산
+rsi = 100 - (100 / (1 + rs))
+
+# 결과 출력
+data['RSI'] = rsi
+print(data[['stck_bsop_date', 'stck_clpr', 'RSI']])
+```
+
+### 코드 설명
+
+1. **delta**: `stck_clpr.diff()`로 종가의 변화량을 계산
+2. **gain**: `delta.where(delta > 0, 0)`을 통해 양수 변화만을 추출하여 상승폭을 계산
+3. **loss**: `-delta.where(delta < 0, 0)`을 통해 음수 변화만을 추출하고, 이를 양수로 변환하여 하락폭을 계산
+4. **average_gain**과 **average_loss**: `gain`과 `loss`의 14일 동안의 평균을 계산
+5. **rs**: 평균 상승폭과 평균 하락폭의 비율을 계산
+6. **rsi**: 최종적으로 RSI 지표를 계산하여 데이터프레임에 추가
+
+이렇게 계산된 **RSI** 값을 사용해 주식이 과매수(70 이상) 또는 과매도(30 이하) 상태인지 판단가능 하고, 이를 통해 매매 시점을 결정하는 데 활용할 수 있다.
+
+
+그리고, 최고가, 최저가, 거래량 등의 정보는 RSI 계산에서는 직접적으로 사용되지 않지만, 주식 분석 및 예측 모델에서는 매우 중요한 역할을 한다. 
+
+### 1. **최고가 (High Price)와 최저가 (Low Price)**
+- **변동성 분석**: 최고가와 최저가는 해당 일자의 주식 가격 변동성을 분석하는 데 사용
+    - 변동성은 주식의 위험도와 불확실성을 나타내며, 이는 투자 결정을 내리는 데 중요한 지표
+- **Bollinger Bands 계산**: Bollinger Bands는 주가의 변동성을 측정하는 지표
+    - 최고가와 최저가를 활용하여 주가가 평균으로부터 얼마나 떨어져 있는지를 분석한다.
+- **전략적 저항 및 지지선 분석**: 최고가와 최저가는 저항선(Resistance)과 지지선(Support)을 설정하는 데 사용
+    - 주식이 특정 가격 수준을 돌파하거나 지지하는 시점은 중요한 매매 시그널로 작용할 수 있다.
+
+### 2. **거래량 (Volume)**
+- **거래량 지표**: 거래량은 주식의 유동성을 나타내며, 주가의 움직임에 대한 강도를 측정하는 데 사용된다. 
+    - 높은 거래량과 함께 주가가 상승하면 상승 추세의 강도가 높다는 신호일 수 있습니다.
+- **OBV(On-Balance Volume) 지표**: OBV는 거래량을 기반으로 한 모멘텀 지표로, 주가 변화와 거래량의 관계를 분석한다. 
+    - 이는 주가의 향후 방향성을 예측하는 데 도움이 됩니다.
+- **RSI와 거래량의 조합**: RSI 지표와 거래량을 함께 분석하면 더 강력한 매매 시그널을 포착할 수 있다. 
+    - RSI가 과매수 상태에 있으나 거래량이 적다면 매수 신호가 약할 수 있습니다.
+
+### 3. **예측 모델에서의 활용**
+- **피처로 활용**: 최고가, 최저가, 거래량 등은 ARIMA나 XGBoost 모델에서 중요한 피처(feature)로 사용된다. 이러한 피처들은 모델이 미래의 주가를 예측하는 데 필요한 중요한 정보를 제공한다.
+  - **XGBoost**: 이 모델은 다수의 피처를 활용하여 주가 예측을 수행하므로, 최고가, 최저가, 거래량, 종가 등의 정보를 모두 포함시켜 모델 성능을 향상시킬 수 있다.
+  - **ARIMA**: ARIMA 모델은 시계열 데이터를 활용하여 예측을 수행하며, 종가와 함께 최고가, 최저가 등을 포함하여 모델을 확장할 수 있다.
+
+### 종합적으로
+최고가, 최저가, 거래량 등의 정보는 다음과 같이 활용될 수 있다.
+- **변동성 및 추세 분석**: Bollinger Bands, 지지선/저항선 설정, 변동성 분석
+- **거래량 기반 지표**: OBV, 거래량-모멘텀 분석
+- **예측 모델 피처**: ARIMA와 XGBoost 모델에서 예측 피처로 활용
+
+이 정보를 모두 활용하여 주식의 종합적인 분석과 예측 모델을 구축할 수 있다. 추가적으로, 이런 지표들을 통합적으로 분석하여 더 정교한 매매 전략을 세울 수 있다.
 
 
