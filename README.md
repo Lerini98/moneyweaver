@@ -143,7 +143,7 @@ Trandigo 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 제주도
 
 
 ## 📚7. Architecture
-![alt text](image-4.png)
+
 <br><br><br>
 
 
@@ -154,7 +154,7 @@ Trandigo 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 제주도
 ![alt text](image-1.png)
 <br>
 2. index page
-![alt text](image-3.png)
+![alt text](image-5.png)
 3. chart page
 ![alt text](image-4.png)
 
