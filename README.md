@@ -30,6 +30,12 @@
             <a href="https://github.com/{깃헙주소}"><div align=center>정재현</div></a>
         </div>
       </td>
+      <td align="center">
+        <div>
+          <img src="https://mblogthumb-phinf.pstatic.net/MjAyMTA2MTBfMTMg/MDAxNjIzMjkwMzA5Njc2.fFIDFMcyjckJ2aOxSnBeEw2TyOI_OnPGyhvyGo9V7BEg.4O-fl43CNJrnDfhkfU-k6Q5joS4YBVVOw9HqdxrpP-Ig.JPEG.kimjin8946/2.jpg?type=w800"height="100px;" alt=""/>
+            <a href="https://github.com/{깃헙주소}"><div align=center>송명</div></a>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
