@@ -1,6 +1,6 @@
 # 🚗Toy project🚗
 
-## 1. 👥팀 소개
+## 👥1. 팀 소개
 ### 팀명 : Moneyweaver 팀
 ### 팀원 소개
 <table align="center">
@@ -40,7 +40,7 @@
 |:----------:|:----------:|:----------:|:----------:|
 |데이터베이스 관리, AWS 기반 인프라 구축 및 관리, 배포 및 모니터링|데이터 수집, 전처리, 통합, 데이터베이스 관리, 전체 아키텍처 설정|사용자 인터페이스 개발, 주식 데이터 시각화 구현, readme작성|프로젝트 도메인 조사|
 <br><br>
-## 2. 💡프로젝트 소개
+## 💡2. 프로젝트 소개
 ### 프로젝트 명 
 <b>Stock Trading Program</b>
 ### 프로젝트 소개 
@@ -127,30 +127,14 @@
 
 <br>
 
-## 4. 📱기술 스텍
+## 📱4. 기술 스텍
 | Data Modeling | DB | Front-End |   Back-End   | Deployment
 |------------|--------|-------------|------------|----------|
 | ![BeautifulSoup](https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![OpenApi](https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square) ![requests](https://img.shields.io/badge/requests-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![SQLAlchemy](https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white) | ![html](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white) ![css](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white) ![JavaScript](https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=black) | ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)|![aws](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 <br><br><br>
 
-
-
-## 5. 🧸요구사항 명세서
-요구사항 명세서는 프로젝트의 기능을 중요도에 따라 구분하고, 세부적으로 구현해야 할 기능들을 우선순위에 따라 배치합니다. 이를 통해 프로젝트를 보다 효율적으로 진행할 수 있도록 설계되었습니다. 저희 <b>Moneyweaver</b>는 이러한 방식으로 기능별 우선순위를 매겨 프로젝트를 보다 체계적으로 관리할 수 있었습니다.
-<br>![요구사항명세서](image-2.png)
-
-- 요구사항 ID : 요구사항별로 유일한 ID를 부여하여 기입합니다. 저희는 프로젝트의 포괄적인 기능 별로 ID를 정의하였습니다.<br>
-
-- 기능구분 : 도출된 요구사항을 간략하게 요약하여 기입하였습니다.<br>
-
-- 중요도 : 해당 요구사항의 전체 시스템 구현 측면에서의 중요도를 기술하였습니다. (상, 중, 하)<br>
-- 요구사항 상세 설명 : 기능이름에 더하여 부가적으로 기능을 구체적으로 기술하였습니다.<br>
-
-
-<br><br><br>
-
-## 6. 📜ERD 설계서
+## 📜5. ERD 설계서
 Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식 자동매매 프로그램의 데이터 구조를 시각적으로 표현한 다이어그램입니다.<br> 이 설계서는 주식 거래 데이터, 기술적 지표, 자동매매 알고리즘 등 다양한 주식 관련 데이터를 효율적으로 관리하고 분석하기 위해, 각 데이터 간의 관계와 구조를 명확하게 정의합니다.<br> ERD 설계를 통해 주식의 과매수 및 과매도 상태, 거래 신호 생성, 매매 기록 등 복잡한 데이터를 체계적으로 관리하고, 이를 기반으로 주식 자동매매 시스템의 기능을 구현할 수 있습니다.<br>
 
 <br>![alt text](image.png)
@@ -160,20 +144,20 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 <br><br><br>
 
 
-## 📚7. Architecture
+## 📚6. Architecture
 
 <br><br><br>
 
 
 
 
-##  💻8. 프로젝트 결과 
+##  💻7. 프로젝트 결과 
 1. main page
 ![alt text](image-1.png)
-<br>
+
 2. index page
 ![alt text](image-5.png)
-<br>
+
 3. chart page
 ![alt text](image-4.png)
 
@@ -185,7 +169,7 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 <br><br><br>
 
 
-## 🤔9. 오류 및 어려웠던점 & 해결 과정
+## 🤔8. 오류 및 어려웠던점 & 해결 과정
 ### 데이터 수집 및 분석부분
 - **설명**: 제주 여행 트랜드 분석에 사용될 수 있는 데이터들의 수집,  알맞은 형태로 전처리 후 저장
 - **문제**: 수집된 데이터들이 서로 다른 형식들을 띄고있었기 때문에 데이터가 통합이 되지않았음.
@@ -215,6 +199,6 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 - **문제**: 라인 엔딩 문제 발생 / aws RDS 사용 시 사용자 계정 생성 문제 / 경설정이 다양해서 에러 발생 시 정확한 원인 찾기가 어려움
 - **해결**: 라인 엔딩 문제 : 스크립트 형식을 Unix 형식의 라인 엔딩(LF)으로 변경하여 해결 / 사용자 계정 생성 : admin 계정에서 user 중 root 사용자 생성하니 admin에게 부여 권한 생겼고, 이후 사용자에게 권한 부여하여 사용자 계정으로 DB 적재 완료 / 정확한 에러 원인 파악 : 에러 경로를 파악하기 용이하도록 django, gunicorn, nginx, docker, run파일 설정이 정확한 경로로 설정하여 해결하였다.
 <br><br><br>
-## 📖10. 2nd Agile 주요계획
+## 📖9. 2nd Agile 주요계획
 
 
