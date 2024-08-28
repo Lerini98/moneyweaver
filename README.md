@@ -144,6 +144,7 @@ RSI 계산에 필요한 데이터
     > 📈**apaxchart**📈
     - 해당 기업의 주식 데이터를 차트로 시각화하여 사용자들이 데이터를 쉽게 파악할 수 있도록 화면을 구성하였습니다.
 
+
 #### aws RDS 생성 및 배포부분
 - **AWS RDS에서 MySQL 데이터베이스 생성**
 1. AWS Management Console에 로그인
@@ -182,6 +183,7 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 
 
 ## 📚6. Architecture
+![image](https://github.com/user-attachments/assets/ef2938e3-44dc-4159-8cdf-cf6cf9392862)
 
 <br><br><br>
 
@@ -229,7 +231,7 @@ Moneyweaver 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 주식
 
 
 ### 재현✏️
-직접 작성
+- **느낀점** : 2차 애자일에서는 머신러닝과 딥러닝을 배운 것을 토대로 자동 매매 프로그램을 돌려보는 것이 목표이기 때문에 수업을 잘 듣고 복습을 열심히 해야겠다고 느꼈습니다.
 <br><br><br>
 ## 📖9. 2nd Agile 주요계획
 
