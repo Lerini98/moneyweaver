@@ -155,6 +155,7 @@ Trandigo 프로젝트의 ERD(Entity-Relationship Diagram) 설계서는 제주도
 <br>
 2. index page
 ![alt text](image-5.png)
+<br>
 3. chart page
 ![alt text](image-4.png)
 
