@@ -9,7 +9,7 @@
       <td align="center">
         <div>
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeZKGzFP52YC9g4upvuMU9ZGkQiRdLe2rfXQ&s"width="100px;"height="100px;" alt=""/>
-           <a href="https://github.com/artemIntellectus"><div align=center>팀장 유혜린</div></a>
+           <a href="https://github.com/Lerini98"><div align=center>팀장 유혜린</div></a>
         </div>
       </td>
       <td align="center">
