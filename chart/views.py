@@ -4,7 +4,39 @@ import json
 from moneyweaver.models import db_connect
 def index(request):
     return render(request, "chart/chart-index.html")
+def chartindex(request):
 
+    return render(request, "chart/index.html")
+def chart(request):
+    df_company, df_day_tb, df_historical_tb = db_connect()
+
+    # 날짜 데이터를 문자열로 변환하고, 잘못된 날짜 값 처리
+    df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
+    df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
+
+    # 필요한 컬럼 계산 및 변환
+    df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
+    df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].dt.strftime('%Y-%m-%d')  # 날짜를 문자열로 변환
+  
+    companyname_list = ['KT', 'LG', '삼성SDS', '현대자동차', '카카오', '신세계 I&C', '롯데이노베이트', '네이버', '포스코', '포스코 DX',
+                        '현대오토에버', '삼성 SDI', '삼성전자', 'SK 하이닉스', '현대백화점', '한화시스템', 'SK inc.']
+
+    # 특정 회사 ID에 대한 데이터 필터링
+    filtered_df = df_historical_tb[df_historical_tb['company_id'] == '030200'].sort_values(by='stck_bsop_date', ascending=True)
+
+    # 필요한 데이터를 추출
+    dates = filtered_df['stck_bsop_date'].tolist()
+    avg_prices = filtered_df['stck_avg'].tolist()
+
+    # 데이터를 템플릿에 전달
+    context = {
+        'company_id': 'KT',
+        'dates': json.dumps(dates),
+        'avg_prices': json.dumps(avg_prices)
+    }
+
+    return render(request, 'chart/charts.html', context)
+  
 def kt_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
 
