@@ -1,0 +1,60 @@
+.body { /*table*/
+    margin: 0 auto; /* 테이블을 화면 중앙으로 정렬 */
+    width: 900px; /* 테이블 너비를 화면의 80%로 설정 */ /* 700px; */
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top: none;
+    border-collapse: collapse; /* 테두리 중복 제거 */
+}
+.header {
+    background-color: rgb(129, 19, 70);
+    text-align: center;
+}
+.table td, .table th {
+    border-bottom: 1px rgb(134, 34, 34) solid; /* 셀 하단에 구분선 추가 */
+    height: 30px;
+    font-size: 14px;
+    padding: 12px; /* 셀 간의 간격을 조절 */
+    text-align: left; /* 텍스트 정렬 */
+}
+.num {
+    width: 50px;
+}
+.title {
+    width: 500px;
+}
+.body {
+    text-align: center;
+}
+.body .title {
+    text-align: left;
+}
+button {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    outline: 1.5px rgb(244, 68, 226) solid; /* rgb(68, 136, 244)*/
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: rgb(164, 199, 255);
+}
+button:active {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: 1.5px rgb(27, 76, 155) solid;
+    padding-left: 10px;
+    background-color: rgb(68, 136, 244);
+}
+
+/*어쩌라구우우우우우우우우웅*/
+
+.table tr.body:hover {
+    background-color: #ed26dd; /* 마우스를 올렸을 때 배경 색상 변경 */
+}
+
+
+
