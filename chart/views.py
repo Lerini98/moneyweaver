@@ -2,18 +2,35 @@ from django.shortcuts import render
 import pandas as pd
 import json
 from moneyweaver.models import db_connect
+from model.model_sselec import predict_stock  # 모델 파일 import
+from model.model_naver import predict_stock_naver
+from model.model_lg import predict_stock_lg
+from model.model_sk import predict_stock_sk
+from model.model_skhynix import predict_stock_skhynix
+# y_pred, y_test, days_2022 = predict_stock()
+# print(y_pred.tolist())
+# days_2022=days_2022.tolist()
+# days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
+
+# print(days_2022)
+
 def index(request):
     return render(request, "chart/chart-index.html")
 def chartindex(request):
 
     return render(request, "chart/index.html")
 def chart(request):
+    y_pred, y_test, days_2022 = predict_stock()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
-
+     
     # 날짜 데이터를 문자열로 변환하고, 잘못된 날짜 값 처리
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
 
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].dt.strftime('%Y-%m-%d')  # 날짜를 문자열로 변환
@@ -32,7 +49,10 @@ def chart(request):
     context = {
         'company_id': 'KT',
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
 
     return render(request, 'chart/charts.html', context)
@@ -44,6 +64,8 @@ def kt_detail_view(request):
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
 
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].dt.strftime('%Y-%m-%d')  # 날짜를 문자열로 변환
@@ -52,7 +74,8 @@ def kt_detail_view(request):
                         '현대오토에버', '삼성 SDI', '삼성전자', 'SK 하이닉스', '현대백화점', '한화시스템', 'SK inc.']
 
     # 특정 회사 ID에 대한 데이터 필터링
-    filtered_df = df_historical_tb[df_historical_tb['company_id'] == '030200'].sort_values(by='stck_bsop_date', ascending=True)
+    if df_historical_tb['stck_bsop_date'] >= '2022-01-01':
+        filtered_df = df_historical_tb[df_historical_tb['company_id'] == '030200'].sort_values(by='stck_bsop_date', ascending=True)
 
     # 필요한 데이터를 추출
     dates = filtered_df['stck_bsop_date'].tolist()
@@ -71,10 +94,16 @@ def kt_detail_view(request):
 
 def lg_detail_view(request):
     # CSV 파일 로드
+    y_pred, y_test, days_2022 = predict_stock_lg()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
     
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
+
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -102,7 +131,10 @@ def lg_detail_view(request):
     context = {
         'company_id': companyname_list[1],
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
     print(filtered_df.head())
     return render(request, 'chart/lg.html', context)
@@ -113,6 +145,10 @@ def ssSDS_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
+
+    # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
+
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -151,6 +187,8 @@ def hd_detail_view(request):
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
 
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -189,6 +227,8 @@ def kakao_detail_view(request):
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
 
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -209,6 +249,7 @@ def kakao_detail_view(request):
     filtered_df = df_historical_tb[df_historical_tb['company_id'] == company_id].sort_values(by='Date', ascending=True)
 
     # 필요한 데이터를 추출
+    
     dates = filtered_df['Date'].tolist()
     avg_prices = filtered_df['avg'].tolist()
 
@@ -226,7 +267,8 @@ def ssg_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -264,7 +306,8 @@ def lotteino_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -298,11 +341,14 @@ def lotteino_detail_view(request):
     return render(request, 'chart/lotteino.html', context)
 
 def naver_detail_view(request):
-    
+    y_pred, y_test, days_2022 = predict_stock_naver()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -330,7 +376,10 @@ def naver_detail_view(request):
     context = {
         'company_id': '네이버',
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
     print(filtered_df.head())
     return render(request, 'chart/naver.html', context)
@@ -340,7 +389,8 @@ def posco_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -378,7 +428,8 @@ def poscodx_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -416,7 +467,8 @@ def hyundaiauto_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -454,7 +506,8 @@ def ssSDI_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -488,11 +541,14 @@ def ssSDI_detail_view(request):
     return render(request, 'chart/ssSDI.html', context)
 
 def ssElec_detail_view(request):
-    
+    y_pred, y_test, days_2022 = predict_stock()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -520,17 +576,23 @@ def ssElec_detail_view(request):
     context = {
         'company_id': '삼성 전자',
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
 
     return render(request, 'chart/ssElec.html', context)
 
 def skhynix_detail_view(request):
-    
+    y_pred, y_test, days_2022 = predict_stock_skhynix()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -558,7 +620,10 @@ def skhynix_detail_view(request):
     context = {
         'company_id': 'SK 하이닉스',
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
 
     return render(request, 'chart/skhynix.html', context)
@@ -568,7 +633,8 @@ def hyundaidp_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -606,7 +672,8 @@ def hanhwasys_detail_view(request):
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -640,11 +707,14 @@ def hanhwasys_detail_view(request):
     return render(request, 'chart/hanhwasys.html', context)
 
 def skinc_detail_view(request):
-    
+    y_pred, y_test, days_2022 = predict_stock_sk()
+    days_2022=days_2022.tolist()
+    days_2022 = [date.strftime('%Y-%m-%d') for date in days_2022]
     df_company, df_day_tb, df_historical_tb = db_connect()
     df_historical_tb['stck_bsop_date'] = df_historical_tb['stck_bsop_date'].astype(str)
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d', errors='coerce')
-
+    # # 2021년 1월 1일 이후의 데이터만 필터링
+    df_historical_tb = df_historical_tb[df_historical_tb['stck_bsop_date'] >= '2022-01-01']
     # 필요한 컬럼 계산 및 변환
     df_historical_tb['stck_avg'] = (df_historical_tb['stck_hgpr'] + df_historical_tb['stck_lwpr']) / 2
     df_historical_tb['stck_bsop_date'] = pd.to_datetime(df_historical_tb['stck_bsop_date'], format='%Y%m%d')
@@ -672,7 +742,10 @@ def skinc_detail_view(request):
     context = {
         'company_id': 'SK inc',
         'dates': json.dumps(dates),
-        'avg_prices': json.dumps(avg_prices)
+        'avg_prices': json.dumps(avg_prices),
+        'y_pred': json.dumps(y_pred.tolist()),  # 템플릿에 넘기기 위해 리스트 변환
+        'y_test': json.dumps(y_test.tolist()),
+        'days_2022': json.dumps(days_2022)
     }
 
     return render(request, 'chart/skinc.html', context)

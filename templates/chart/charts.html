@@ -102,10 +102,10 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="sb-sidenav-footer">
+                    <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Start Bootstrap
-                    </div> -->
+                    </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
@@ -177,28 +177,68 @@
                             
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area me-1"></i>
+                                Area Chart Example
                             </div>
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-pie me-1"></i>
-                                        Pie Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
+                            
+                            <div class="card-body">
+                                <div id="chart2" style="width: 100%; height: 350px;"></div>
                             </div>
+                            
+                            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    // Django에서 전달된 데이터를 JavaScript 변수에 할당
+                                    var dates = {{ days_2022|safe }};  // x축 데이터
+                                    var yPred = {{ y_pred|safe }};  // 예측값
+                                    var yTest = {{ y_test|safe }};  // 실제값
+                            
+                                    var options = {
+                                        chart: {
+                                            type: 'line',
+                                            height: 350
+                                        },
+                                        series: [
+                                            {
+                                                name: 'Predicted Prices',  // 첫 번째 선 (예측값)
+                                                data: yPred
+
+                                            },
+                                            {
+                                                name: 'Actual Prices',  // 두 번째 선 (실제값)
+                                                data: yTest
+                                        
+                                            }
+                                        ],
+                                        xaxis: {
+                                            categories: dates,  // x축 레이블
+                                            title: {
+                                                text: 'Date'
+                                            }
+                                        },
+                                        yaxis: {
+                                            title: {
+                                                text: 'Prices'
+                                            }
+                                        },
+                                        title: {
+                                            text: '{{ company_id }} 주식 예측 및 실제 가격',
+                                            align: 'center'
+                                        }
+                                    };
+                            
+                                    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+                                    chart.render();
+                                });
+                            </script>
+                            
+                            
+                            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
+                        
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
