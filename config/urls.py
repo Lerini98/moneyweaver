@@ -20,5 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("moneyweaver.urls")),
-    path('chart/',include("chart.urls"))
+    path('chart/',include("chart.urls")),
+    path('user/', include("user.urls")),
+    path('accounts/', include('allauth.urls'))
 ]
