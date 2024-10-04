@@ -1,7 +1,3 @@
-
-
-
-
 # 📒 2nd Agile 소개
 ## 📍 1. 2nd Agile 배경과 목표
 ### 2nd Agile 진행 배경
@@ -64,9 +60,9 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
 
 
 
-## 📍 4. Architecture
+## 📍 4. AI 결과
 모델의 구조를 상세히 설명하고 각 구성 요소의 역할을 명확히 합니다.
-
+### 모델의 구조
 - **입력층**: 시계열 길이 8~20일, 특성 수 5개.
 - **LSTM 층**:
   - 첫 번째 LSTM 층: 64 유닛, Dropout 0.4 ~ 0.6 적용.
@@ -74,24 +70,42 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
   - 첫 번째 Linear 층: 64 유닛, Dropout 0.4 ~ 0.6 적용
 - **Dense 층**:
   - 출력층: 1개의 뉴런, 활성화 함수 없음
-- **모델 시각화**:
-  
-  ![모델 아키텍처](./pictures/09-ToyProject_fifth_model.png)
-  ![모델 아키텍처](./pictures/LSTM_model_architecture.png)
-<br><br><br>
+- **모델 아키텍처**:
+> ![LSTM_model_architecture](https://github.com/user-attachments/assets/d180d29c-8ff4-4cc2-9534-4ed999121c4a)
+<br><br>
+
+### 모델 결과
+- **Confusion Matrics**
+> ![model_performance](https://github.com/user-attachments/assets/a0252b17-40e8-45e8-999d-21a8519abd3c)
+
 
 
 
 
 ## 📍 7. 프로젝트 결과 
 #### 메인화면
-![alt text](image-1.png)
+> ![image](https://github.com/user-attachments/assets/dbfd1a66-f4b0-4d43-8e03-145719402821)
+
 
 #### 차트 화면
-![alt text](image-5.png)
+1. 인덱스 페이지 : 모델 결과, 점수 그리고 조사한 기업의 정보를 사용자에게 제공
+> ![image](https://github.com/user-attachments/assets/c2f59b29-dfdd-4e48-9a23-39a26764f214)
+2. 주가 예측 페이지 : 2022년 1월 3일부터 실제 주가와 예측 주가를 사용자에게 제공
+- 과거 주식 차트
+> ![image](https://github.com/user-attachments/assets/4051f712-bf42-4547-bf92-f0d8ff796db3)
+- 실제 주가와 예측 주가 비교
+> ![image](https://github.com/user-attachments/assets/78ded884-a888-4fb8-8cbd-4486a9043f5d)
+
 
 #### 게시판 
-![alt text](image-4.png)
+1. 게시판 메인 화면 : 게시글 목록을 볼 수 있음
+> ![image](https://github.com/user-attachments/assets/62679c97-c8c4-4534-990a-022cb7935759)
+2. 글쓰기
+> ![image](https://github.com/user-attachments/assets/413546bb-8381-4154-b126-d39b4c7d4fec)
+3. 게시글 등록
+> ![image](https://github.com/user-attachments/assets/bf8eb384-c029-4568-8116-e72e96a77b1d)
+
+
 
 
 
