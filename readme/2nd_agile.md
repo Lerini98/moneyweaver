@@ -17,12 +17,6 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
 
 <br><br><br>
 
-
-## 📍 3. 기술 영역
-| Data Modeling | DB | Front-End |   Back-End   | Deployment | AI
-|------------|--------|-------------|------------|----------|----------|
-| ![BeautifulSoup](https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![OpenApi](https://img.shields.io/badge/Docs-OpenAPI%203.0-success?style=flat-square) ![requests](https://img.shields.io/badge/requests-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![SQLAlchemy](https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white) | ![html](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white) ![css](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white) ![JavaScript](https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=black) | ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)|![aws](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)|![aws](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-
 <br><br><br>
 ## 📍 2. 개발 개요
 #### 데이터 탐색 및 전처리
@@ -48,8 +42,7 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
 
 #### 게시판 화면
 - 주식 사이트에서 흔히 볼 수 있는 사용자들 간의 소통 공간을 마련했습니다. 사용자는 회원가입 및 로그인을 통해 글을 작성하고 삭제할 수 있으며, 각 글의 상세 내용을 확인할 수 있습니다.
-#### aws 배포부분
-직접작성
+
 
 
 
@@ -125,6 +118,7 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
 - **모델학습코드 모듈화** : 모델학습을 진행하는 코드가 ipynb로 저장되어 있었는데 이를 데이터 로드함수, 모델 클래스, 예측 함수 세부분으로 구현하여 `model_회사이름.py`형태로 저장하였습니다.
 - **view와 연동** : 예측함수에서 실제 주가, 예측 주가, 날짜를 리턴하여 chart앱의 view파일에서 불러왔습니다.
 - **html과의 연동** : model에서 불러온 데이터의 타입이 tensor형태라 이를 리스트로 형변환을 해주고 chart.js와 연동을 위해 view에서 json.dumps형태로 리턴해주었습니다.
+<br>
 ## 📍 4. 오류로그
 
 ### 문제점과 해결 과정
@@ -140,9 +134,8 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
     
 - **문제점 4**: 과적합 현상 발생
   - **해결**: Dropout 층 추가 및 Early Stopping 적용
-    
-- **문제점 5**: 모델 정확성 불ㅇ
 
+    
 
 ## 📍 5. 느낀점
 
@@ -165,5 +158,10 @@ LSTM을 활용한 주식 가격 예측 모델 개발과 웹페이지 업데이�
 
 
 ## 📍3rd Agile 주요계획
+1. 모델 정확도 형상
+추가적인 외부 요인(뉴스, 경제 지표 등)을 포함하여 모델의 정확도를 더욱 향상시킬 예정입니다.
+2. 코드 리팩토링 및 모듈화
+중복되는 코드가 많기 때문에 이를 해결하기 위해서 따로 코드 리팩토링을 진행하고, 데이터를 로드하는데 오래걸리는 문제를 해결하기 위해주식api를 연동하여 실시간으로 주식데이터를 불러와 데이터를 로드하는데 걸리는 시간을 줄일 예정입니다.
+
 
 
