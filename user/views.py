@@ -33,10 +33,15 @@ def board_write(request):
     if request.method == 'POST':
         form = BoardForm(request.POST)
         if form.is_valid():
+            # 로그인 여부 확인
+            if request.user.is_authenticated:
+                writer = request.user
+            else:
+                writer = None
             Board.objects.create(
                 title=form.cleaned_data['title'],
                 contents=form.cleaned_data['contents'],
-                writer=request.user
+                writer=writer
             )
             return redirect('/user/')
         else:
