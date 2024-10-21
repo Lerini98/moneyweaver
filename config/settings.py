@@ -32,7 +32,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+# settings.py
+TIME_ZONE = 'Asia/Seoul'  # 한국 시간으로 설정
+USE_TZ = True  # 타임존 사용 활성화
 # Application definition
 
 INSTALLED_APPS = [

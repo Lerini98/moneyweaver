@@ -4,7 +4,8 @@ from django.db import models
 class Board(models.Model):
     title = models.CharField(max_length=128, verbose_name='제목')
     contents = models.TextField(verbose_name='내용')
-    writer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='작성자')  # 로그인하지 않은 사용자도 가능하게 설정
+    writer = models.CharField(max_length=50, null=True, blank=True, verbose_name='작성자 이름')  # CharField로 수정
+    
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='등록시간')
     
     # 게시글의 제목(title)이 Board object 대신하기

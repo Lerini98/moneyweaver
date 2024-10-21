@@ -46,10 +46,6 @@ def db_connect():
         cur.close()
         con.close()
 
-df_company, df_day_tb, df_historical_tb = db_connect()
-print(db_connect())
-print(type(df_historical_tb['stck_hgpr'][1]))
-print('date:',type(df_historical_tb['stck_bsop_date'][1]))
-print('회사',type(df_historical_tb['company_id'][1]))
+
 
 

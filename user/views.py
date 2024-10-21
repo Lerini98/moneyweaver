@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from .models import Board
 from .forms import BoardForm
 
@@ -7,7 +8,11 @@ def index(request):
     return render(request, 'user/user.html')
 
 def board_list(request):
-    boards = Board.objects.all() #.order_by('-id') 
+    boards = Board.objects.all().order_by('-created_at') 
+    paginator = Paginator(boards, 10)  # 한 페이지에 10개씩 보여줌
+    page_number = request.GET.get('page')  # 요청한 페이지 번호
+    page_obj = paginator.get_page(page_number)  # 해당 페이지의 객체를 가져옴
+
     return render(request, 'user/user.html', {'boards': boards})
 
 # def board_write(request):
@@ -37,7 +42,7 @@ def board_write(request):
             if request.user.is_authenticated:
                 writer = request.user
             else:
-                writer = None
+                writer = form.cleaned_data['writer']
             Board.objects.create(
                 title=form.cleaned_data['title'],
                 contents=form.cleaned_data['contents'],

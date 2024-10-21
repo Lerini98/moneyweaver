@@ -1,18 +1,13 @@
-# models/model_samsung.py
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 import numpy as np
 import FinanceDataReader as fdr
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
-from tqdm.auto import tqdm
-import torchinfo
 import pickle
+import os
 
 
 # LSTM 모델 클래스 정의
@@ -35,15 +30,17 @@ class LSTMModelskhynix(nn.Module):
         out = self.fc2(out)
         return out
 
-def load_data_skhynix():
-    sam = fdr.DataReader('000660')
-    del sam['Change']
-    sam.columns = ['시가', '고가', '저가', '종가', '거래량']
-    sam['종가2'] = sam['종가']
-    begins_2022 = sam.index.get_loc('2022-01-03')
+def preprocess_and_save_data_skhynix(save_path='skhynix_preprocessed_data.pkl'):
+    sam = fdr.DataReader('000660')  # 데이터 불러오기
+    del sam['Change']  # Change 열 삭제
+    sam.columns = ['시가', '고가', '저가', '종가', '거래량']  # 열 이름 변경
+    sam['종가2'] = sam['종가']  # 종가2 열 추가
+    
+    # 데이터 전처리 (스케일링)
     scaler = StandardScaler()
     sam.iloc[:, 0:5] = scaler.fit_transform(sam.iloc[:, 0:5])
 
+    # 윈도우 사이즈 정의
     window_size = 8
     x = []
     y = []
@@ -51,8 +48,28 @@ def load_data_skhynix():
         x.append(sam.iloc[i:i+window_size, 0:5])
         y.append(sam.iloc[i+window_size, 5])
 
+    # 배열로 변환
     x = np.array(x)
     y = np.array(y)
+
+    # 전처리된 데이터를 저장
+    with open(save_path, 'wb') as f:
+        pickle.dump((x, y, sam.index), f)
+    
+    return x, y, sam.index
+
+def load_data_skhynix(save_path='skhynix_preprocessed_data.pkl'):
+    if not os.path.exists(save_path):
+        print("Preprocessed data not found, preprocessing...")
+        x, y, index = preprocess_and_save_data_skhynix(save_path)
+    else:
+        print("Loading preprocessed data...")
+        with open(save_path, 'rb') as f:
+            x, y, index = pickle.load(f)
+    
+    # 데이터 분할
+    begins_2022 = np.where(index == '2022-01-03')[0][0]
+    window_size = 8
     split_point = begins_2022 - window_size
 
     x_train = x[:split_point]
@@ -62,6 +79,7 @@ def load_data_skhynix():
 
     x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.2, shuffle=True)
 
+    # Tensor로 변환
     x_train = torch.FloatTensor(x_train)
     y_train = torch.FloatTensor(y_train)
     x_val = torch.FloatTensor(x_val)
@@ -69,52 +87,16 @@ def load_data_skhynix():
     x_test = torch.FloatTensor(x_test)
     y_test = torch.FloatTensor(y_test)
 
-    return x_train, x_val, x_test, y_train, y_val, y_test, sam.index[sam.index >= '2022-01-03']
+    return x_train, x_val, x_test, y_train, y_val, y_test, index[index >= '2022-01-03']
 
 def predict_stock_skhynix():
     x_train, x_val, x_test, y_train, y_val, y_test, days_2022 = load_data_skhynix()
 
     model = LSTMModelskhynix(input_size=5, hidden_size=64, output_size=1)
-    criterion = nn.L1Loss()
-    optimizer = optim.Adam(model.parameters(), lr=0.1)
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.6)
-
-    num_epochs = 150
-    best_val_loss = float('inf')
-    patience = 20
-    counter = 0
-
-    # for epoch in tqdm(range(num_epochs), desc="epoch", position=0):
-    #     model.train()
-    #     for batch_x, batch_y in DataLoader(TensorDataset(x_train, y_train), batch_size=32, shuffle=True):
-    #         optimizer.zero_grad()
-    #         outputs = model(batch_x)
-    #         loss = criterion(outputs.squeeze(), batch_y)
-    #         loss.backward()
-    #         optimizer.step()
-
-    #     model.eval()
-    #     with torch.no_grad():
-    #         val_loss = 0
-    #         for batch_x, batch_y in DataLoader(TensorDataset(x_val, y_val), batch_size=32):
-    #             outputs = model(batch_x)
-    #             val_loss += criterion(outputs.squeeze(), batch_y).item()
-    #         val_loss /= len(DataLoader(TensorDataset(x_val, y_val), batch_size=32))
-
-    #     if val_loss < best_val_loss:
-    #         best_val_loss = val_loss
-    #         torch.save(model.state_dict(), 'best_model_skhynix.pth')
-    #         counter = 0
-    #     else:
-    #         counter += 1
-    #         if counter >= patience:
-    #             break
-
     model.load_state_dict(torch.load('best_model_skhynix.pth'))
-    # pickle.dump(model, open('model.pickle', 'wb'))
     model.eval()
+
     with torch.no_grad():
         y_pred = model(x_test).squeeze().detach().numpy()
 
     return y_pred, y_test, days_2022
-
