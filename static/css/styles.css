@@ -10836,3 +10836,166 @@ textarea.form-control-lg {
   width: 4rem;
   font-size: 2rem;
 }
+
+
+
+
+
+
+
+
+
+/* user 부분 추가 css */
+.tablee { /*table*/
+  margin: 0 auto; /* 테이블을 화면 중앙으로 정렬 */
+  width: 100%; /* 테이블 너비를 화면의 80%로 설정 */ /* 700px; */
+  /*max-width: 1500px;*/
+  border-radius: 5px; /*테이블의 테두리를 둥글게*/
+  border-collapse: collapse;
+  border-top: none; /*테이블의 상단 경계선을 없앤다*/
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.headerr{
+    background-color: #dae7ff;/*#eaeaea#212529*/ /* 번호/제목/작성자/작성날짜 */
+    text-align: center;
+}
+
+.sms1 {
+  width: 4%;
+}
+
+.sms3 {
+  width: 15%;
+}
+.sms4 {
+  width: 20%;
+}
+
+.container-content{
+    margin: 0 auto;
+    padding: 0 48px;
+}
+.tablee td, .tablee th {
+    border-bottom: 1px rgb(14, 34, 34) solid;  /* 셀 하단에 구분선 추가 */
+    /* height: 24px; */
+    font-size: 16px;
+    padding: 14px; /* 셀 간의 간격을 조절 */
+    text-align: left; /* 텍스트 정렬 */
+}
+
+button {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    /* outline: 1.5px rgb(244, 68, 226) solid; /* rgb(68, 136, 244) */
+    border-radius: 5px;
+    padding-left: 10px;
+    /* background-color: rgb(164, 199, 255); */
+}
+button:active {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: 1.5px rgb(27, 76, 155) solid;
+    padding-left: 10px;
+    /* background-color: rgb(68, 136, 244); */
+}
+
+
+/* 게시글 목록에서 제목 누를때, */
+.btn-board-title{
+  color: inherit;
+  text-decoration: none;
+}
+.btn-board-title:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+.btn-goto-list {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* 목록 버튼 글씨-하양 */
+  background-color: #007bff; /* 목록 버튼 배경색 (파란색) */
+  border: none;
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+  text-align: center;
+  text-decoration: none; /* 링크 밑줄 제거 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 배경색 변화 효과 */
+}
+
+.btn-goto-list:hover {
+  background-color: #0056b3; /* 호버 시 배경색 (어두운 파란색) */
+}
+
+.btn-goto-list:focus {
+  outline: none; /* 포커스 시 윤곽선 제거 */
+}
+
+
+
+
+.table tr.body:hover {
+    background-color: #ed26dd; /* 마우스를 올렸을 때 배경 색상 변경 */
+}
+
+
+
+/* 목록버튼: light버전*/
+.user-btn-light {
+  --bs-btn-color: #212529;
+  --bs-btn-bg: #eaeaea; /* 버튼바탕색 */
+  --bs-btn-border-color: #212529;
+  --bs-btn-hover-color: #212529;
+  --bs-btn-hover-bg: #f8f9fa; /*#212529*/
+  --bs-btn-hover-border-color: #f8f9fa;
+  --bs-btn-focus-shadow-rgb: 248, 249, 250;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #f8f9fa;
+  --bs-btn-active-border-color: #f8f9fa;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #f8f9fa;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #f8f9fa;
+  --bs-gradient: none;
+  width: 100px;
+  height: 40px;
+}
+/* 목록버튼: dark버전 */
+.user-btn-dark {
+  --bs-btn-color: #eaeaea;
+  --bs-btn-bg: #212529; /* 버튼바탕색 */
+  --bs-btn-border-color: #eaeaea;
+  --bs-btn-hover-color: #212529;
+  --bs-btn-hover-bg: #f8f9fa; /*#212529*/
+  --bs-btn-hover-border-color: #f8f9fa;
+  --bs-btn-focus-shadow-rgb: 248, 249, 250;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #f8f9fa;
+  --bs-btn-active-border-color: #f8f9fa;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #f8f9fa;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #f8f9fa;
+  --bs-gradient: none;
+  width: 100px;
+  height: 40px;
+}
+
+.btn-container {
+  width: 100%; /* 전체 너비로 설정 */
+  display: flex;
+  justify-content: center; /* 버튼들을 가로로 가운데 정렬 */
+}

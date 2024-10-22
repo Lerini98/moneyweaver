@@ -13,7 +13,7 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'css/userbs.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <!--
     <link href="{% static 'css/user.css' %}" rel="stylesheet" />-->
 </head>
@@ -58,10 +58,11 @@
                 <td class="sms3">작성자</td>
                 <td class="sms4">작성날짜</td>
             </tr>
-            {% if boards %}
-                {% for board in boards %}
+
+            {% if page_obj.object_list %}
+                {% for board in page_obj.object_list %}
                 <tr>
-                    <td>{{ forloop.counter }}</td> <!--{{ board.id }}-->
+                    <td>{{ forloop.revcounter }}</td> <!--{{ board.id }}-->
                     <td><a href="{% url 'board_detail' board.pk %}" class="btn-board-title">{{ board.title }}</a></td>
                     <td>{{ board.writer }}</td>
                     <td>{{ board.created_at }}</td>
@@ -73,42 +74,59 @@
                 </tr>
             {% endif %}
         </table>
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; 처음</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">이전</a>
-                {% endif %}
-        
-                <span class="current">
-                    페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
-                </span>
-        
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">다음</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">마지막 &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+
     </div>
 
     <br>
 
     <div class="btn-container">
-        <a class="btn user-btn-light" href="{% url 'board_write' %}">글쓰기</a>
+        <div class="pagination">
+            <span class="step-links">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+                        </li>
+                    {% endif %}
+                
+                    {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_num %}
+                            {% if page_num == page_obj.number %}
+                                <li class="page-item disabled">
+                                    <span class="page-link text-secondary">{{ page_num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="disabled">
+                                <span class="page-link text-secondary text-muted">・・・</span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </span>
+        </div>
     </div>
-
-    <!--
-    <br>
-    <table>
-        <tr>
-            <td>
-                <a class="btn user-btn-light" href="{% url 'board_write' %}">글쓰기</a>
-            </td> 
-        </tr>
-    </table>
--->
-
+    
+    <div class="btn-container">
+        <a class="btn user-btn-light" href="{% url 'board_write' %}">글쓰기</a>
+    </div>  
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
 </body>
