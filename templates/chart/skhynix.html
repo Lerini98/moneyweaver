@@ -59,7 +59,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="/chart/index/skinc/">SK I&C</a>
+                                    <a class="nav-link" href="/chart/index/skinc/">SK InC</a>
                                     <a class="nav-link" href="/chart/index/skhynix/">SK 하이닉스</a>
                                 
                                 </nav>
@@ -100,7 +100,8 @@
                                 Area Chart Example
                             </div>
                             <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div> -->
-                        <div class="card mb-4">
+                        <!-- 차트시작 Database에 있는거 -->
+                        <!-- <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
                                 Area Chart Example
@@ -147,12 +148,12 @@
                             </script>
                             
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                        </div>
-
+                        </div> -->
+                        <!-- 예측 모델 차트 -->
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
+                                SK 하이닉스 주식 예측 및 실제 가격
                             </div>
                             
                             <div class="card-body">
@@ -160,13 +161,28 @@
                             </div>
                             
                             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                            
                             <script>
                                 document.addEventListener("DOMContentLoaded", function() {
                                     // Django에서 전달된 데이터를 JavaScript 변수에 할당
-                                    var dates = {{ days_2022|safe }};  // x축 데이터
+                                    var dates = {{ days_2022|safe }};  // x축 데이터 (하루 단위 날짜)
                                     var yPred = {{ y_pred|safe }};  // 예측값
                                     var yTest = {{ y_test|safe }};  // 실제값
-                            
+
+                                    // 월별 데이터만 필터링 (매월 첫 번째 날짜만 표시)
+                                    var filteredDates = [];
+                                    var lastMonth = '';
+
+                                    dates.forEach(function(date) {
+                                        var month = date.substring(0, 7);  // YYYY-MM만 추출
+                                        if (month !== lastMonth) {
+                                            filteredDates.push(date);  // 월이 바뀔 때만 추가
+                                            lastMonth = month;
+                                        } else {
+                                            filteredDates.push('');  // 중간 날짜는 빈 값으로 처리 (표시 안 함)
+                                        }
+                                    });
+
                                     var options = {
                                         chart: {
                                             type: 'line',
@@ -176,23 +192,26 @@
                                             {
                                                 name: 'Predicted Prices',  // 첫 번째 선 (예측값)
                                                 data: yPred
-
                                             },
                                             {
                                                 name: 'Actual Prices',  // 두 번째 선 (실제값)
                                                 data: yTest
-                                        
                                             }
                                         ],
                                         xaxis: {
-                                            categories: dates,  // x축 레이블
-                                            title: {
-                                                text: 'Date'
+                                            categories: filteredDates,  // 월별 데이터만 표시
+                                            labels: {
+                                                rotate: -30,  // 레이블이 길 경우 회전시켜서 보이기 좋게 함
+                                                formatter: function(val, timestamp, index) {
+                                                    return val !== '' ? val : '';  // 빈 값일 경우 레이블 생략
+                                                }
                                             }
                                         },
                                         yaxis: {
-                                            title: {
-                                                text: 'Prices'
+                                            labels: {
+                                                formatter: function(val) {
+                                                    return val;  // y축에 숫자만 표시 (레이블 제거)
+                                                }
                                             }
                                         },
                                         title: {
@@ -200,11 +219,13 @@
                                             align: 'center'
                                         }
                                     };
-                            
+
                                     var chart = new ApexCharts(document.querySelector("#chart2"), options);
                                     chart.render();
                                 });
                             </script>
+
+
                             
                             
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
