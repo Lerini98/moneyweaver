@@ -4,7 +4,7 @@ env:
   variables:
     # docker 파라미터 정의
     ECS_CONTAINER_NAME: ecs-django-container
-    IMAGE_REPO_NAME: ecs-django-ecr # aws ecr에 등록이 되어 있는 name
+    IMAGE_REPO_NAME: ecs-mw-build # aws ecr에 등록이 되어 있는 name
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: ap-northeast-2
 
@@ -21,13 +21,12 @@ phases:
       - echo -n ${ECR_PASSWORD} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 
-
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      # Github Repository에 있는 Dockerfile의 위치에 맞춰 수정 
-      - docker build -f ./codepipeline/ecs-django/Dockerfile -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      # Github Repository에 있는 Dockerfile의 위치에 맞춰 수정
+      - docker build -f ./Dockerfile -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $REPOSITORY_URI
 
   post_build:
