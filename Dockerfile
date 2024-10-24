@@ -21,6 +21,8 @@ WORKDIR /app
 # config/settings.py 안에 SECRET_KEY 확인하고 삽입
 ENV SECRET_KEY 'django-insecure-ur9y8)5!pe#5d-+i!vxj$bm(&xy#0bv#&=2^$p+()izoh0$tdn'
 
-COPY run.sh .
+COPY ./run.sh .
 RUN chmod +x run.sh
 CMD ["./run.sh"]
+
+
