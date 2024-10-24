@@ -4,7 +4,7 @@ env:
   variables:
     # docker 파라미터 정의
     ECS_CONTAINER_NAME: ecs-django-container
-    IMAGE_REPO_NAME: ecs-mw-build # aws ecr에 등록이 되어 있는 name
+    IMAGE_REPO_NAME: ecs-django-ecr # aws ecr에 등록이 되어 있는 name
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: ap-northeast-2
 
