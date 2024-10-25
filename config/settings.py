@@ -26,9 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-ur9y8)5!pe#5d-+i!vxj$bm(&xy#0bv#&=2^$p+()izoh0$tdn'
-# 
-# 
+
 # AWS SSM 클라이언트 생성
 ssm = boto3.client('ssm', region_name='ap-northeast-2')
 
