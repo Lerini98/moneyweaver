@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import pymysql 
 from decouple import config
+import boto3 
 
 pymysql.install_as_MySQLdb()
 
@@ -26,7 +27,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-ur9y8)5!pe#5d-+i!vxj$bm(&xy#0bv#&=2^$p+()izoh0$tdn'
-SECRET_KEY = config('SECRET_KEY')
+# 
+# 
+# AWS SSM 클라이언트 생성
+ssm = boto3.client('ssm', region_name='ap-northeast-2')
+
+def get_parameter(name, with_decryption=True):
+    """AWS Parameter Store에서 값을 가져오는 함수"""
+    return ssm.get_parameter(Name=name, WithDecryption=with_decryption)['Parameter']['Value']
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_parameter('/mw-db-info/SECRET_KEY')
+
+# SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -103,17 +116,29 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# 원본
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_PORT'),
+#     }
+# }
+
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': get_parameter('/mw-db-info/DB_NAME'),
+        'USER': get_parameter('/mw-db-info/DB_USER'),
+        'PASSWORD': get_parameter('/mw-db-info/DB_PASSWORD', with_decryption=True),
+        'HOST': get_parameter('/mw-db-info/DB_HOST'),
+        'PORT': get_parameter('/mw-db-info/DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
