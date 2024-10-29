@@ -5,3 +5,6 @@ from django.shortcuts import render
 # -> 화면(Template) & 데이터/Database(Model)
 def index(request):
     return render(request, "moneyweaver/moneyweaver.html")
+
+def intro(request):
+    return render(request, "moneyweaver/intro.html")
