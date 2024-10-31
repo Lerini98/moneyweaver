@@ -5,5 +5,6 @@ from .views import *
 urlpatterns = [
     # localhost/user/ + ''
     path('', index, name="moneyweaver-index"),
-    path('intro/', intro, name="moneyweaver-intro")
+    path('intro/', intro, name="moneyweaver-intro"),
+    path('intro/popup/', popup, name="moneyweaver-popup")
 ]

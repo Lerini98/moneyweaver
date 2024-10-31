@@ -8,3 +8,6 @@ def index(request):
 
 def intro(request):
     return render(request, "moneyweaver/intro.html")
+
+def popup(request):
+    return render(request, "moneyweaver/popup.html")
