@@ -33,7 +33,7 @@ class LSTMModelsk(nn.Module):
         out = self.fc2(out)
         return out
     
-def preprocess_and_save_data_sk(save_path='model/sk_preprocessed_data_fin.pkl'):
+def preprocess_and_save_data_sk(save_path='model/fastapi/sk_preprocessed_data_fin.pkl'):
     sam = fdr.DataReader('034730')  # 데이터 불러오기
     del sam['Change']  # Change 열 삭제
     sam.columns = ['시가', '고가', '저가', '종가', '거래량']  # 열 이름 변경
@@ -61,7 +61,7 @@ def preprocess_and_save_data_sk(save_path='model/sk_preprocessed_data_fin.pkl'):
     
     return x, y, sam.index
 
-def load_data_sk(save_path='model/sk_preprocessed_data_fin.pkl'):
+def load_data_sk(save_path='model/fastapi/sk_preprocessed_data_fin.pkl'):
     if not os.path.exists(save_path):
         print("Preprocessed data not found, preprocessing...")
         x, y, index = preprocess_and_save_data_sk(save_path)
