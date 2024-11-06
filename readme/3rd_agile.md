@@ -22,6 +22,8 @@
 
 ## 📍시스템 전체 Architecture
 곧 추가될 예정
+## 📍사이트 맵
+<img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%82%AC%EC%9D%B4%ED%8A%B8%EB%A7%B5.png?raw=true" alt="요구사항" width="600">
 
 ## 📍Last Agile 까지 개발로그
 <details>
@@ -76,14 +78,25 @@
 ## 📍각 Agile 별 결과
 <details>
     <summary>
-        <h3 style="display: inline;">🔗 1st Agile</h3>
+        <h3 style="display: inline;">🔗 1st Agile</h3>   
     </summary>
+    <p><b>📌 메인화면</b></p> 
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/image-1.png?raw=true" alt="요구사항" width="600">
+    <br><br>
+    <p><b>📌 인덱스 페이지 : Show Chart!를 누르면 각 회사의 주가를 확인할 수 있는 페이지로 연결되도록 </b></p> 
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/image-3.png?raw=true" alt="요구사항" width="600">
+    <br><br>
+    <p><b>📌 차트 페이지 : 회사별 주가를 확인할 수 있음 </b></p> 
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/image-4.png?raw=true" alt="요구사항" width="600">
+    
 </details>
 <br>
 <details>
     <summary>
         <h3 style="display: inline;">🔗 2nd Agile</h3>
     </summary>
+    <p><b>📌 인덱스 페이지 수정 :</b> 1차 애자일에서 만든 인덱스 페이지가 각 페이지 별로 이동하기 불편한 단점이 있었고 조금 더 편리하게 이동할 수 있도록 사이드 네비바 추가, 또한 우리 인공지능 모델의 성능 지표와 회사별 정보 제공도 추가</p>
+   
 </details>
 <br>
 <details>
