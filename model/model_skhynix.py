@@ -30,7 +30,7 @@ class LSTMModelskhynix(nn.Module):
         out = self.fc2(out)
         return out
 
-def preprocess_and_save_data_skhynix(save_path='skhynix_preprocessed_data.pkl'):
+def preprocess_and_save_data_skhynix(save_path='model/skhynix_preprocessed_data.pkl'):
     sam = fdr.DataReader('000660')  # 데이터 불러오기
     del sam['Change']  # Change 열 삭제
     sam.columns = ['시가', '고가', '저가', '종가', '거래량']  # 열 이름 변경
@@ -58,7 +58,7 @@ def preprocess_and_save_data_skhynix(save_path='skhynix_preprocessed_data.pkl'):
     
     return x, y, sam.index
 
-def load_data_skhynix(save_path='skhynix_preprocessed_data.pkl'):
+def load_data_skhynix(save_path='model/skhynix_preprocessed_data.pkl'):
     if not os.path.exists(save_path):
         print("Preprocessed data not found, preprocessing...")
         x, y, index = preprocess_and_save_data_skhynix(save_path)
@@ -93,10 +93,22 @@ def predict_stock_skhynix():
     x_train, x_val, x_test, y_train, y_val, y_test, days_2022 = load_data_skhynix()
 
     model = LSTMModelskhynix(input_size=5, hidden_size=64, output_size=1)
-    model.load_state_dict(torch.load('best_model_skhynix.pth'))
+    model.load_state_dict(torch.load('model/best_model_skhynix.pth'))
     model.eval()
 
     with torch.no_grad():
         y_pred = model(x_test).squeeze().detach().numpy()
 
-    return y_pred, y_test, days_2022
+    # 내일의 주식이 오르는지 내리는지 확인
+    trend = []
+    for i in range(1, len(y_pred)):
+        if y_pred[i] > y_test[i-1]:  # 오늘 예측값이 어제 실제값보다 높으면 상승
+            trend.append('상승')
+        else:
+            trend.append('하락')
+    
+    # 첫 날의 예측은 비교할 이전 값이 없으므로 None으로 설정
+    trend.insert(0, None)
+
+    return y_pred, y_test, days_2022, trend
+

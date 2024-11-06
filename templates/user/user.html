@@ -7,18 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Heroic Features - Start Bootstrap Template</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <title>Moneyweaver</title>
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    <!--
-    <link href="{% static 'css/user.css' %}" rel="stylesheet" />-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body> 
+<body class="sb-nav-fixed"> 
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-lg-5">
@@ -26,18 +20,27 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/accounts/logout/" role="button">Log Out</a>
-                    </li>
-                    {% else %} 
-                    <li class="nav-item"><a role="button" class="nav-link" href="{% provider_login_url 'google' %}">Login</a></li>
-                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <header class="py-5">
         <div class="container px-lg-5">
@@ -50,6 +53,7 @@
         </div>
     </header>
 
+    <main>
     <div class="container-content">
         <table class="tablee">
             <tr class="headerr">
@@ -62,7 +66,7 @@
             {% if page_obj.object_list %}
                 {% for board in page_obj.object_list %}
                 <tr>
-                    <td>{{ forloop.revcounter }}</td> <!--{{ board.id }}-->
+                    <td>{{ board.number }}</td> <!--{{ board.number }}-->
                     <td><a href="{% url 'board_detail' board.pk %}" class="btn-board-title">{{ board.title }}</a></td>
                     <td>{{ board.writer }}</td>
                     <td>{{ board.created_at }}</td>

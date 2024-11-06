@@ -23,3 +23,18 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+document.getElementById("openPopup").addEventListener("click", function(event) {
+    event.preventDefault(); // 기본 링크 동작 방지
+    document.getElementById("popup").style.display = "block";
+});
+
+document.querySelector(".close-button").addEventListener("click", function() {
+    document.getElementById("popup").style.display = "none";
+});
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById("popup")) {
+        document.getElementById("popup").style.display = "none";
+    }
+}
