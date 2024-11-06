@@ -37,6 +37,8 @@
     <li><strong>Chart </strong>앱 : 우리 프로젝트의 데이터베이스와 또 우리 데이터를 이용하여 Ai 모델을 연동하여 사용자에게 우리가 개발한 ai모델이 예측한 주가와 실제 주가를 동시에 제공하여 사용자에게 제공하여 사용자가 보다 주식을 투자하는데 더 나은 결정을 하도록 돕습니다.</li>
     <br>
     <li><strong>user </strong>앱 : 우리 웹서비스를 이용하는 사용자들이 자유롭게 주식에 관한 정보를 서로 공유하고 이야기를 할 수 있도록 게시판 서비스를 제공하는 앱입니다. 사용자들이 작성한 글들은 우리 moneyweaver의 데이터베이스에 저장되고 이를 연동하여 화면에 띄움으로서 우리 서비스를 이용하는 모든 사용자들이 게시판에 작성된 모든 글의 목록을 조회할 수 있습니다.</li>
+    <h4>🔗 template 부분 : Chart.js이용</h4>
+    <p>Django의 views 파일에서 데이터베이스에서 필요한 데이터를 가져와 JSON 형태로 변환한 뒤, render 함수를 통해 HTML 템플릿에 전달하고, HTML에서는 Chart.js 라이브러리를 script로 불러와 JSON 데이터를 x축과 y축에 지정하여 그래프를 생성합니다.</p>
    
 
    
@@ -90,7 +92,6 @@
     <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/image-4.png?raw=true" alt="요구사항" width="600">
     
 </details>
-<br>
 <details>
     <summary>
         <h3 style="display: inline;">🔗 2nd Agile</h3>
@@ -105,9 +106,49 @@
    <p><b>📌 게시판 서비스 생성 </b></p>
    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/2%EC%B0%A8%20%EA%B2%8C%EC%8B%9C%ED%8C%90.png?raw=true" alt="요구사항" width="600">
    <br>
+   <p><b>📌 모델 성능 지표 </b></p>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/2%EC%B0%A8%20%EB%AA%A8%EB%8D%B8%20%EC%84%B1%EB%8A%A5.png?raw=true" alt="요구사항" width="600">
+   <br>
 </details>
 <details>
     <summary>
-        <h3 style="display: inline;">🔗 3rd Agile</h3>
+        <h3 style="display: inline;">🔗 3rd Agile </h3>
     </summary>
+    <p><b>📌 홈 화면 </b></p>
+    <p><b>📌 소개 페이지 </b></p>
+    <p><b>📌 기능은 팝업창으로! </b></p>
+    <p><b>📌 차트 인덱스 페이지 </b></p>
+    <p><b>📌 예측 주식 차트와 내일 주가 상승 하락 예측 정보 제공 </b></p>
+    <p><b>📌 익명 게시판 </b>: 로그인 기능을 삭제함으로서 누구든지 와서 글을 작성하고 수정할 수 있다</p>
 </details>
+
+## 📍 이번 프로젝트를 통해 느낀점
+<details>
+   <summary>
+      <h3 style="display: inline;">👑혜린</h3>
+   </summary>
+   <p>여기에 내용을 작성해주세요</p>
+</details>
+<details>
+   <summary>
+      <h3 style="display: inline;">성은</h3>
+   </summary>
+   <p>여기에 내용을 작성해주세요</p>
+</details>
+<details>
+   <summary>
+      <h3 style="display: inline;">나연</h3>
+   </summary>
+   <p>여기에 내용을 작성해주세요</p>
+</details>
+<details>
+   <summary>
+      <h3 style="display: inline;">명신</h3>
+   </summary>
+   <p>여기에 내용을 작성해주세요</p>
+</details>
+
+## ➕ 추가
+### ❗AI 상세❗
+주가 예측에 사용되는 여러 경제 지표와 기술적 지표에 관한 설명, 그리고 이러한 지표들이 주가 예측에 미치는 영향과 AI 학습에 어떻게 적용되는지에 대한 내용이 담겨 있습니다. 또한, 교육에서 배운 AI 학습 과정과 이를 활용한 주식 예측 모델링 과정이 상세히 설명되어 있어, 이를 읽으시면 주가 예측과 관련된 깊은 이해와 함께 많은 공부가 될 것입니다.
+
