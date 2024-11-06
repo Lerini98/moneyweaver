@@ -97,9 +97,15 @@
     </summary>
     <p><b>📌 인덱스 페이지 수정 :</b> 1차 애자일에서 만든 인덱스 페이지가 각 페이지 별로 이동하기 불편한 단점이 있었고 조금 더 편리하게 이동할 수 있도록 사이드 네비바 추가, 또한 우리 인공지능 모델의 성능 지표와 회사별 정보 제공도 추가</p>
     <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/2%EC%B0%A8%20%EC%9D%B8%EB%8D%B1%EC%8A%A4%20%ED%8E%98%EC%9D%B4%EC%A7%80.png?raw=true" alt="요구사항" width="600">
-   
+   <br>
+   <p><b>📌 차트 페이지 css적용 :</b> 예측 모델까지 연동하여 예상 주가도 사용자 화면에 구현하였음</p>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/2%EC%B0%A8%20%EC%B0%A8%ED%8A%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.png?raw=true" alt="요구사항" width="600">
+
+   <br>
+   <p><b>📌 게시판 서비스 생성 </b></p>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/2%EC%B0%A8%20%EA%B2%8C%EC%8B%9C%ED%8C%90.png?raw=true" alt="요구사항" width="600">
+   <br>
 </details>
-<br>
 <details>
     <summary>
         <h3 style="display: inline;">🔗 3rd Agile</h3>
