@@ -112,7 +112,7 @@ RSI 계산에 필요한 데이터
 <br>
 <details>
   <summary><h3 style="display: inline;">3rd Agile</h3></summary>
-  <a href="https://github.com/Lerini98/moneyweaver/blob/main/readme/2nd_agile.md">🔗🔗</a>
+  <a href="https://github.com/Lerini98/moneyweaver/blob/main/readme/3rd_agile.md">🔗🔗</a>
  
 </details>
 
