@@ -39,6 +39,8 @@
     <li><strong>user </strong>앱 : 우리 웹서비스를 이용하는 사용자들이 자유롭게 주식에 관한 정보를 서로 공유하고 이야기를 할 수 있도록 게시판 서비스를 제공하는 앱입니다. 사용자들이 작성한 글들은 우리 moneyweaver의 데이터베이스에 저장되고 이를 연동하여 화면에 띄움으로서 우리 서비스를 이용하는 모든 사용자들이 게시판에 작성된 모든 글의 목록을 조회할 수 있습니다.</li>
     <h4>🔗 template 부분 : Chart.js이용</h4>
     <p>Django의 views 파일에서 데이터베이스에서 필요한 데이터를 가져와 JSON 형태로 변환한 뒤, render 함수를 통해 HTML 템플릿에 전달하고, HTML에서는 Chart.js 라이브러리를 script로 불러와 JSON 데이터를 x축과 y축에 지정하여 그래프를 생성합니다.</p>
+    <h4>🔗 Database 부분 : aws rds이용</h4>
+    <p>프로젝트의 데이터베이스는 AWS RDS(Amazon Relational Database Service)를 사용해 구축했습니다. RDS는 관리형 데이터베이스 서비스로, MySQL, PostgreSQL 등 다양한 엔진을 지원하며 자동 백업, 보안 업데이트, 장애 복구 기능을 제공해 안정성이 뛰어납니다. 이를 통해 데이터베이스 운영과 유지보수에 소요되는 시간을 절약하고, 확장성과 성능을 확보할 수 있었습니다.</p>
    
 
    
@@ -47,6 +49,7 @@
 <details>
     <summary><h3 style="display: inline;">DevOps</h3></summary>
     <h4>🔗 Cloud Service : AWS</h4>
+    <p>프로젝트 배포는 AWS의 CI/CD 서비스를 이용해 자동화했습니다. 코드가 GitHub에 푸시되면 AWS CodePipeline이 변경 사항을 감지하고, CodeBuild를 통해 빌드 및 테스트를 수행한 후, CodeDeploy로 배포하는 방식입니다. 이를 통해 코드 변경이 있을 때마다 자동으로 애플리케이션이 배포되며, AWS CloudWatch를 통해 배포 후 성능과 오류를 모니터링해 안정성을 유지했습니다.</p>
     
 </details>
 <br>
@@ -115,11 +118,17 @@
         <h3 style="display: inline;">🔗 3rd Agile </h3>
     </summary>
     <p><b>📌 홈 화면 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EB%A9%94%EC%9D%B8.png?raw=true" alt="메인" width="600">
     <p><b>📌 소개 페이지 </b></p>
-    <p><b>📌 기능은 팝업창으로! </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EC%86%8C%EA%B0%9C.png?raw=true" alt="소개" width="600">
+    <p><b>📌 팝업창! </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%ED%8C%9D%EC%97%85.png?raw=true" alt="팝업" width="600">
     <p><b>📌 차트 인덱스 페이지 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EC%B0%A8%ED%8A%B8%20%EC%9D%B8%EB%8D%B1%EC%8A%A4.png?raw=true" alt="팝업" width="600">
     <p><b>📌 예측 주식 차트와 내일 주가 상승 하락 예측 정보 제공 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EA%B7%B8%EB%9E%98%ED%94%84.png?raw=true" alt="차트" width="600">
     <p><b>📌 익명 게시판 </b>: 로그인 기능을 삭제함으로서 누구든지 와서 글을 작성하고 수정할 수 있다</p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EA%B2%8C%EC%8B%9C%ED%8C%90.png?raw=true" alt="게시판" width="600">
 </details>
 
 ## 📍 이번 프로젝트를 통해 느낀점
