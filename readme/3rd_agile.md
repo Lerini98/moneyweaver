@@ -129,6 +129,21 @@
     <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EA%B7%B8%EB%9E%98%ED%94%84.png?raw=true" alt="차트" width="600">
     <p><b>📌 익명 게시판 </b>: 로그인 기능을 삭제함으로서 누구든지 와서 글을 작성하고 수정할 수 있다</p>
     <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/3%EC%B0%A8%20%EA%B2%8C%EC%8B%9C%ED%8C%90.png?raw=true" alt="게시판" width="600">
+    <p><b>📌 ai - 단순주기 강화모델 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EB%8B%A8%EC%88%9C%EC%A3%BC%EA%B8%B0%EA%B0%95%ED%99%94%EB%AA%A8%EB%8D%B8.png?raw=true" alt="ai" width="600">
+    <p><b>📌 ai - 성능지표자료1 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%84%B1%EB%8A%A5%EC%A7%80%ED%91%9C%EC%9E%90%EB%A3%8C1.png?raw=true" alt="ai" width="600">
+    <p><b>📌 ai - 실제와 예측 그래프, 주기강화모델 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%8B%A4%EC%A0%9C%EC%99%80%EC%98%88%EC%B8%A1%EA%B7%B8%EB%9E%98%ED%94%84-%EC%A3%BC%EA%B8%B0%EA%B0%95%ED%99%94%EB%AA%A8%EB%8D%B8.png?raw=true" alt="ai" width="600">
+    <p><b>📌 ai - 실제와 예측 그래프비교 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%8B%A4%EC%A0%9C%EC%99%80%EC%98%88%EC%B8%A1%EA%B7%B8%EB%9E%98%ED%94%84%EB%B9%84%EA%B5%90.png?raw=true" alt="ai" width="600">
+    <p><b>📌 ai - 이동평균선 기준정확도 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%9D%B4%EB%8F%99%ED%8F%89%EA%B7%A0%EC%84%A0%EA%B8%B0%EC%A4%80%EC%A0%95%ED%99%95%EB%8F%84.png?raw=true" alt="ai" width="600">
+    <p><b>📌 ai - 주기강화모델 </b></p>
+    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%A3%BC%EA%B8%B0%EA%B0%95%ED%99%94%EB%AA%A8%EB%8D%B8.png?raw=true" alt="ai" width="600">
+
+
+
 </details>
 
 ## 📍 이번 프로젝트를 통해 느낀점
