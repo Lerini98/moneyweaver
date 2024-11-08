@@ -42,6 +42,7 @@
    <summary>
       <h3 style="display: inline;">📌 전체 </h3>
    </summary>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%A0%84%EC%B2%B4%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.png?raw=true" alt="요구사항" width="600">
   
   
   
