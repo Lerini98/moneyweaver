@@ -20,8 +20,17 @@
 
 <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD.png?raw=true" alt="요구사항" width="600">
 
-## 📍시스템 전체 Architecture
-곧 추가될 예정
+## 📍Architecture
+<details>
+   <summary>
+      <h3 style="display: inline;">📌 AI </h3>
+   </summary>
+   <h4>LSTM Model Architecture</h4>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/final_toy_LSTM_model.png?raw=true" alt="요구사항" width="600">
+   <h4>Combined Model Architecture</h4>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/combined.png?raw=true" alt="요구사항" width="600">
+</details>
+
 ## 📍사이트 맵
 <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%82%AC%EC%9D%B4%ED%8A%B8%EB%A7%B5.png?raw=true" alt="요구사항" width="600">
 
