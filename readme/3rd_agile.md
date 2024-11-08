@@ -30,6 +30,22 @@
    <h4>Combined Model Architecture</h4>
    <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/combined.png?raw=true" alt="요구사항" width="600">
 </details>
+<details>
+   <summary>
+      <h3 style="display: inline;">📌 AWS : CICD </h3>
+   </summary>
+   <h4>LSTM Model Architecture</h4>
+   <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/cicd.png?raw=true" alt="요구사항" width="600">
+  
+</details>
+<details>
+   <summary>
+      <h3 style="display: inline;">📌 전체 </h3>
+   </summary>
+  
+  
+  
+</details>
 
 ## 📍사이트 맵
 <img src="https://github.com/Lerini98/moneyweaver/blob/main/img/%EC%82%AC%EC%9D%B4%ED%8A%B8%EB%A7%B5.png?raw=true" alt="요구사항" width="600">
